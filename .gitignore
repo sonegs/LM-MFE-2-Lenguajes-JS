@@ -17,5 +17,4 @@ build/
 transpiled/
 
 # Playground
-transpiled/playground.js
 src/playground.ts
