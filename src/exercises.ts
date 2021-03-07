@@ -68,18 +68,20 @@ console.log('\n\n****** EXERCISE 4 *****\n\n');
 
 const checkBook = (books: BooksInterface, titleToSearch: string): boolean[] => books.map(book => (book.isRead && titleToSearch == book.title) ? true : false );
 const isBookRead = (books: BooksInterface, titleToSearch: string): boolean => checkBook(books, titleToSearch).reduce((previous, current) => current ? current : previous );  
-// interface BooksInterface {
-//     [ index: number ]:{
-//         title: String,
-//         isRead: Boolean
-//     }
-// }
+
 interface BooksInterface {
-    map(books: (book: {
+    [ index: number ]:{
         title: String,
         isRead: Boolean
-    }) => void);
+    }
 }
+
+// interface BooksInterface {
+//     map(books: (book: {
+//         title: String,
+//         isRead: Boolean
+//     }) => void);
+// }
 const books: BooksInterface = [
     { title: "Harry Potter y la piedra filosofal", isRead: true },
     { title: "Canción de hielo y fuego", isRead: false },
