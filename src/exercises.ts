@@ -3,25 +3,25 @@
 console.log('\n\n****** EXERCISE 1 *****\n\n');
 
 const namesArray = ['Braulio', 'Antonio', 'Miguel', 'Santi'];
-const head = ( [firstName, ...moreNames]: string[] ) => { return firstName; }; // Destructuring
+const head = ( [firstName, ...moreNames]: string[] ) => firstName; // Destructuring
 console.log(namesArray);
 console.log(`Extrae el valor de la primera posición del Array: ${head(namesArray)}`);
 
 // Implementa una función tail (inmutable), tal que, dado un array como entrada devuelta todos menos el primer elemento. Utiliza rest operator.
 
-const tail = ([first, ...myArray]: string[]) => { return myArray; }; // Rest Operator
+const tail = ([first, ...myArray]: string[]) => myArray; // Rest Operator
 console.log('Devuelve todo el array excepto el primer elemento:');
 console.log(tail(namesArray));
 
 // Implementa una función init (inmutable), tal que, dado un array como entrada devuelva todos los elementos menos el último. Utiliza los métodos que ofrece Array.prototype.
 
-const init = (myArray) => { return myArray.slice(0, 3); }; // Prototype Method Example
+const init = (myArray) => myArray.slice(0, 3); // Prototype Method Example
 console.log('Devuelve todo el array excepto el último elemento:');
 console.log(init(namesArray));
 
 // Implementa una función last (inmutable), tal que, dado un array como entrada devuelva el último elemento.
 
-const last = (myArray) => { return [...myArray].pop(); }; // Spread + Pop
+const last = (myArray) => [...myArray].pop(); // Spread + Pop
 console.log(`Devuelve el valor de la última posición del Array: ${last(namesArray)}`);
 
 // EJERCICIO 2 **********
@@ -66,18 +66,32 @@ console.log(merge(a, b));
 // Crea una función isBookRead que reciba una lista de libros y un título y devuelva si se ha leído o no dicho libro. Un libro es un objeto con title como string y isRead como booleano. En caso de no existir el libro devolver false TIP: Existe un método de Array.prototype que te ayudará a buscar según un patrón.
 console.log('\n\n****** EXERCISE 4 *****\n\n');
 
-const checkBook = (books: any[], titleToSearch: string): boolean[] => books.map(book => (book.isRead && titleToSearch == book.title) ? true : false );
-const isBookRead = (books: Object[], titleToSearch: string): boolean => checkBook(books, titleToSearch).reduce((previous, current) => current ? current : previous );  
-
-const books: Object[] = [
+const checkBook = (books: BooksInterface, titleToSearch: string): boolean[] => books.map(book => (book.isRead && titleToSearch == book.title) ? true : false );
+const isBookRead = (books: BooksInterface, titleToSearch: string): boolean => checkBook(books, titleToSearch).reduce((previous, current) => current ? current : previous );  
+// interface BooksInterface {
+//     [ index: number ]:{
+//         title: String,
+//         isRead: Boolean
+//     }
+// }
+interface BooksInterface {
+    map(books: (book: {
+        title: String,
+        isRead: Boolean
+    }) => void);
+}
+const books: BooksInterface = [
     { title: "Harry Potter y la piedra filosofal", isRead: true },
     { title: "Canción de hielo y fuego", isRead: false },
     { title: "Devastación", isRead: true },
-  ];
+];
 
   console.log(isBookRead(books, "Devastación")); // true
   console.log(isBookRead(books, "Canción de hielo y fuego")); // false
   console.log(isBookRead(books, "Los Pilares de la Tierra")); // false
+
+
+
 
 
 // EJERCICIO 5
@@ -99,7 +113,6 @@ class SlothMachine {
     }
 
     play(){
-        this.count++;
         this.first = Math.random() < 0.5;
         this.second = Math.random() < 0.5;
         this.third = Math.random() < 0.5;
@@ -108,6 +121,7 @@ class SlothMachine {
             this.count = 0; 
         } else { 
             console.log('Good luck next time!!');
+            this.count++;
         }
         
     }
