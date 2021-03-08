@@ -106,15 +106,13 @@ class SlothMachine {
         this.first = Math.random() < 0.5;
         this.second = Math.random() < 0.5;
         this.third = Math.random() < 0.5;
+        this.count++;
         if (this.first && this.second && this.third) { 
             console.log(`"Congratulations!!!. You won ${this.count} coins!!`); 
             this.count = 0; 
         } else { 
             console.log('Good luck next time!!');
         }
-        
-        this.count++;
-        
     }
 }
 
