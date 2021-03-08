@@ -66,23 +66,15 @@ console.log(merge(a, b));
 // Crea una función isBookRead que reciba una lista de libros y un título y devuelva si se ha leído o no dicho libro. Un libro es un objeto con title como string y isRead como booleano. En caso de no existir el libro devolver false TIP: Existe un método de Array.prototype que te ayudará a buscar según un patrón.
 console.log('\n\n****** EXERCISE 4 *****\n\n');
 
-const checkBook = (books: BooksInterface, titleToSearch: string): boolean[] => books.map(book => (book.isRead && titleToSearch == book.title) ? true : false );
-const isBookRead = (books: BooksInterface, titleToSearch: string): boolean => checkBook(books, titleToSearch).reduce((previous, current) => current ? current : previous );  
+const checkBook = (books:BookInterface[], titleToSearch: string): boolean[] => books.map(book => (book.isRead && titleToSearch == book.title) ? true : false );
+const isBookRead = (books:BookInterface[], titleToSearch: string): boolean => checkBook(books, titleToSearch).reduce((previous, current) => current ? current : previous );  
 
-interface BooksInterface {
-    [ index: number ]:{
-        title: String,
-        isRead: Boolean
-    }
+interface BookInterface {
+    title: String,
+    isRead: Boolean
 }
 
-// interface BooksInterface {
-//     map(books: (book: {
-//         title: String,
-//         isRead: Boolean
-//     }) => void);
-// }
-const books: BooksInterface = [
+const books: BookInterface[] = [
     { title: "Harry Potter y la piedra filosofal", isRead: true },
     { title: "Canción de hielo y fuego", isRead: false },
     { title: "Devastación", isRead: true },
@@ -91,10 +83,6 @@ const books: BooksInterface = [
   console.log(isBookRead(books, "Devastación")); // true
   console.log(isBookRead(books, "Canción de hielo y fuego")); // false
   console.log(isBookRead(books, "Los Pilares de la Tierra")); // false
-
-
-
-
 
 // EJERCICIO 5
 /*El objetivo de este ejercicio es crear una máquina tragaperras utilizando clases donde cada vez que juguemos insertemos una moneda. 
