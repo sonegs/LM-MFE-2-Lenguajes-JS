@@ -111,8 +111,9 @@ class SlothMachine {
             this.count = 0; 
         } else { 
             console.log('Good luck next time!!');
-            this.count++;
         }
+        
+        this.count++;
         
     }
 }
