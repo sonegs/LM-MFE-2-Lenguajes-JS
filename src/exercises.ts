@@ -123,3 +123,107 @@ machine1.play();
 machine1.play();
 machine1.play();
 machine1.play();
+
+console.log('\n\n****** EXTRA EXERCISES *****\n\n');
+
+// Califications Summary
+// Utilizando TypeScript escribe una función que reciba una lista de estudiantes (que tienen nombre y una lista de notas) y devuelva otra lista donde por cada estudiante devuelva su nombre, su nota más alta y la media de sus notas.
+
+// Crea para ello dos entidades, una para representar al estudiante (Student) y otra para representar su nombre, nota más alta y media de notas (StudentSummary).
+
+// No se permite el uso de clases. En caso de usar funciones auxiliares típalas. Puedes usar la función Number.prototype.toPrecision(3) para reducir el número de decimales de la media de calificaciones a tres números.
+console.log('\n\n****** CALIFICATIONS SUMMARY *****\n\n');
+
+interface Students {
+    name: String,
+    califications: number[]
+}
+
+const students: Students[] = [
+    { name: "Juan", califications: [1.56, 2.13, 7.53, 9.71, 2.67, 2.43, 2.86, 9.42, 8.08, 7.34] },
+    { name: "Álvaro", califications: [4.49, 1.52, 7.0, 8.3, 8.01, 6.45, 3.72, 3.27, 6.99, 6.01] },
+    { name: "María", califications: [2.99, 7.33, 1.14, 3.26, 0.98, 2.94, 4.99, 4.51, 1.8, 9.3] },
+    { name: "Jorge", califications: [4.6, 3.63, 9.07, 9.03, 3.05, 6.61, 4.81, 1.39, 2.97, 8.69] },
+    { name: "Mónica", califications: [9.72, 6.07, 1.11, 4.72, 0.04, 1.56, 0.66, 3.87, 6.97, 9.48] },
+  ];
+  
+  const summarizeClassRoom = (studentList: Students[]) => {
+
+    interface StudentsResults {
+        name: String,
+        highestCalification: number;
+        averageCalification: number;
+    }
+
+    const studentsResult: StudentsResults[] = [];
+
+    studentList.map(student => {
+
+        // Student name
+        const name = student.name;
+
+        //Highest Calification
+        const highestCalification: number = Math.max(...student.califications);
+
+        // Average Calitifation
+        const sum: number = student.califications.reduce((previous, current) => current += previous);
+        const result: number = sum / student.califications.length;
+        const averageCalification:number = parseFloat(result.toPrecision(3));
+
+        // Add the final student object into the array studentResults
+        studentsResult.push({name, highestCalification, averageCalification});
+    });
+
+    return studentsResult;
+  };
+  
+  console.log(summarizeClassRoom(students));
+
+//   Curry Setter
+// En un formulario tenemos un objeto con los campos name, surname y age que representan un usuario. Crea una función set que reciba un objeto con los campos de usuario, el nombre de una propiedad y su valor y actualice la propiedad del objeto con el valor pasado como argumento.
+
+// El ejercicio debe cumplir la siguiente norma: la función debe ser pura, es decir, debe crear un nuevo objeto sin modificar el existente.
+
+// Opcional
+// Currifica dicha función para que permita crear funciones donde el argumento del nombre de la propiedad esté configurado previamente. Es decir, modifica la función set para poder crear setName, setSurname y setAge que reciban sólo el objeto y el valor y sepan qué propiedad actualizar.
+
+// TypeScript: Además, si quieres, puedes extraer la firma de la interfaz sin ponerla en línea con la implementación.
+console.log('\n\n****** CURRY SETTER *****\n\n');
+
+const changeName = (user: Users, newName:string) => {
+    return {
+        ...user,
+        name: newName
+    }
+}
+const changeSurname = (user: Users, newSurname:string) => {
+    return {
+        ...user,
+        surname: newSurname
+    }
+}
+const changeAge = (user: Users, newAge:number) => {
+    return {
+        ...user,
+        age: newAge
+    }
+}
+
+const set = changeValue => (...args) => changeValue(...args);
+
+const setName = set(changeName);
+const setSurname = set(changeSurname);
+const setAge = set(changeAge);
+
+interface Users {
+    name: string;
+    surname: string;
+    age: number;
+}
+
+const julia: Users = { name: "Julia", surname: "Álvarez", age: 19 };
+
+console.log(setName(julia, "Ana")); // { name: 'Ana', surname: 'Álvarez', age: 19 };
+console.log(setSurname(julia, "González")); // { name: 'Julia', surname: 'González', age: 19 };
+console.log(setAge(julia, 25)); // { name: 'Julia', surname: 'Álvarez', age: 25 }
+console.log(julia === setName(julia,"Ana")); // false
