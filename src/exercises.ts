@@ -66,7 +66,7 @@ console.log(merge(a, b));
 // Crea una función isBookRead que reciba una lista de libros y un título y devuelva si se ha leído o no dicho libro. Un libro es un objeto con title como string y isRead como booleano. En caso de no existir el libro devolver false TIP: Existe un método de Array.prototype que te ayudará a buscar según un patrón.
 console.log('\n\n****** EXERCISE 4 *****\n\n');
 
-const checkBook = (books:BookInterface[], titleToSearch: string): boolean[] => books.map(book => (book.isRead && titleToSearch == book.title) ? true : false );
+const checkBook = (books:BookInterface[], titleToSearch: string): boolean[] => books.map(book => (book.isRead && titleToSearch == book.title));
 const isBookRead = (books:BookInterface[], titleToSearch: string): boolean => checkBook(books, titleToSearch).reduce((previous, current) => current ? current : previous );  
 
 interface BookInterface {
@@ -190,38 +190,23 @@ const students: Students[] = [
 // TypeScript: Además, si quieres, puedes extraer la firma de la interfaz sin ponerla en línea con la implementación.
 console.log('\n\n****** CURRY SETTER *****\n\n');
 
-const changeName = (user: Users, newName:string) => {
-    return {
-        ...user,
-        name: newName
-    }
-}
-const changeSurname = (user: Users, newSurname:string) => {
-    return {
-        ...user,
-        surname: newSurname
-    }
-}
-const changeAge = (user: Users, newAge:number) => {
-    return {
-        ...user,
-        age: newAge
-    }
-}
+const julia: Users = { name: "Julia", surname: "Álvarez", age: 19 };
 
-const set = changeValue => (...args) => changeValue(...args);
-
-const setName = set(changeName);
-const setSurname = set(changeSurname);
-const setAge = set(changeAge);
+const set = (julia: Users, type: string, value: string) => {
+    return{
+        ...julia,
+        [type]: value
+    }
+}
+const setName = (julia: Users, value) => set(julia, 'name', value);
+const setSurname = (julia: Users, value) => set(julia, 'surname', value);
+const setAge = (julia: Users, value) => set(julia, 'age', value );
 
 interface Users {
     name: string;
     surname: string;
     age: number;
 }
-
-const julia: Users = { name: "Julia", surname: "Álvarez", age: 19 };
 
 console.log(setName(julia, "Ana")); // { name: 'Ana', surname: 'Álvarez', age: 19 };
 console.log(setSurname(julia, "González")); // { name: 'Julia', surname: 'González', age: 19 };
