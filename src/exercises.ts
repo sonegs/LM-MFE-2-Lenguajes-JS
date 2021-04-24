@@ -192,15 +192,15 @@ console.log('\n\n****** CURRY SETTER *****\n\n');
 
 const julia: Users = { name: "Julia", surname: "Álvarez", age: 19 };
 
-const set = (julia: Users, type: string, value: string) => {
+const set = (julia: Users, type: string, value: string): Users => {
     return{
         ...julia,
         [type]: value
     }
 }
-const setName = (julia: Users, value) => set(julia, 'name', value);
-const setSurname = (julia: Users, value) => set(julia, 'surname', value);
-const setAge = (julia: Users, value) => set(julia, 'age', value );
+const setName = (julia: Users, value): Users => set(julia, 'name', value);
+const setSurname = (julia: Users, value): Users => set(julia, 'surname', value);
+const setAge = (julia: Users, value): Users => set(julia, 'age', value );
 
 interface Users {
     name: string;
